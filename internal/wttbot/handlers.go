@@ -85,7 +85,7 @@ func (wtt *WhatTheTimeBot) ListHandler(ctx context.Context, b *bot.Bot, update *
 	lts := ltm.Values()
 	msg := "Locales:\n"
 	for i, lt := range lts {
-		msg += fmt.Sprintf("%d)%s:%s\n", i, lt.Name, lt.LocationName)
+		msg += fmt.Sprintf("%d)%s:%s\n", i+1, lt.Name, lt.LocationName)
 	}
 
 	b.SendMessage(ctx, &bot.SendMessageParams{
@@ -197,35 +197,36 @@ func (wtt *WhatTheTimeBot) HelpHandler(ctx context.Context, b *bot.Bot, update *
 	msg := `
 <pre>
 /add [name] [locale]
-	add new locale to localtes
+	add new locale to locales
 	examples
 		/add Tbilisi Asia/Tbilisi
-		/add "Tbilisi the capital of Gerorgia" Asia/Tbilisi
+		/add "Tbilisi the capital of Georgia" Asia/Tbilisi
 -------------------------------------------------------------
 /del [name]
-	delete locale from localtes
+	delete locale from locales
 	example
-		/del Tblilisi
+		/del Tbilisi
 -------------------------------------------------------------
 /list
 	list locales
 -------------------------------------------------------------
 /time
-	send current time for locales
+	send current time in locales
 -------------------------------------------------------------
-/time [HH:MM] [locale|locale position]
-	send hours and minutes for locales
+/time [HH:MM] [locale|locale id from list]
+	send hours and minutes in locales
 	examples
 		/time 12:00 Asia/Tbilisi
-		/time 12:00 0
+		/time 12:00 1
 -------------------------------------------------------------
 /datetime 
-	send current date and time for locales
+	send current date and time  in locales
 -------------------------------------------------------------
-/datetime [MM-DD-YYYY] [HH:MM] [locale]
-	send date and time for locales
+/datetime [MM-DD-YYYY] [HH:MM] [locale|locale id from list]
+	send date and time in locales
 	example
 		/datetime 05-04-2025 16:05 Asia/Tbilisi
+		/datetime 05-04-2025 16:05 1
 	</pre>`
 	b.SendMessage(ctx, &bot.SendMessageParams{
 		ChatID:          chatId,

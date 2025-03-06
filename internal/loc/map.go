@@ -50,6 +50,7 @@ func (ltm *LocalTimeMap) GetByPosition(p string) (*LocalTime, error) {
 	if err != nil {
 		return nil, err
 	}
+	i--
 	ltm.mx.Lock()
 	if l, exists := ltm.Position[i]; !exists {
 		ltm.mx.Unlock()
